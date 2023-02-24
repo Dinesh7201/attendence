@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Attendance Tracker</title>
+</head>
+<body>
+	<header>
+		<h1>Attendance Tracker</h1>
+	</header>
+	<main>
+		<p>
+			<label>Present:</label>
+			<span class="count" id="present-count">0</span>
+			<button onclick="updateCounts(true, true)">+</button>
+			<button onclick="updateCounts(true, false)">-</button>
+		</p>
+		<p>
+			<label>Absent:</label>
+			<span class="count" id="absent-count">0</span>
+			<button onclick="updateCounts(false, true)">+</button>
+			<button onclick="updateCounts(false, false)">-</button>
+		</p>
+		<p>
+			<label>Attendance Percentage:</label>
+			<span class="percentage" id="percentage">0%</span>
+		</p>
+	</main>
+	<script>
+		var presentCount = localStorage.getItem("presentCount") || 0;
+		var absentCount = localStorage.getItem("absentCount") || 0;
+
+		function updateCounts(isPresent, isIncrement) {
+			if (isPresent) {
+				if (isIncrement) {
+					presentCount++;
+				} else {
+					presentCount--;
+				}
+				localStorage.setItem("presentCount", presentCount);
+			} else {
+				if (isIncrement) {
+					absentCount++;
+				} else {
+					absentCount--;
+				}
+				localStorage.setItem("absentCount", absentCount);
+			}
+
+			var presentLabel = document.getElementById("present-count");
+			presentLabel.innerHTML = presentCount;
+
+			var absentLabel = document.getElementById("absent-count");
+			absentLabel.innerHTML = absentCount;
+
+			var total = parseInt(presentCount) + parseInt(absentCount);
+			var percentage = 0;
+			if (total > 0) {
+				percentage = (presentCount / total) * 100;
+			}
+			var percentageLabel = document.getElementById("percentage");
+			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
+		}
+
+		window.onload = function() {
+			var presentLabel = document.getElementById("present-count");
+			presentLabel.innerHTML = presentCount;
+
+			var absentLabel = document.getElementById("absent-count");
+			absentLabel.innerHTML = absentCount;
+
+			var total = parseInt(presentCount) + parseInt(absentCount);
+			var percentage = 0;
+			if (total > 0) {
+				percentage = (presentCount / total) * 100;
+			}
+			var percentageLabel = document.getElementById("percentage");
+			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
+		};
+	</script>
+</body>
+</html>

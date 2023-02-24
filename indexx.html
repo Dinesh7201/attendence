@@ -78,7 +78,7 @@
 			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
 		}
 
-				window.onload = function() {
+        window.onload = function() {
 			var presentLabel = document.getElementById("present-count");
 			presentLabel.innerHTML = presentCount;
 
@@ -90,6 +90,7 @@
 			if (total > 0) {
 				percentage = (presentCount / total) * 100;
 			}
+            
 			var percentageLabel = document.getElementById("percentage");
 			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
 		};

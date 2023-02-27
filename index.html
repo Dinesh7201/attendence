@@ -7,6 +7,7 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+	
 	<header class="container-fluid">
 		<h1 class="text-center">Attendance Tracker</h1>
 	</header>
@@ -36,6 +37,10 @@
 					<span class="percentage" id="percentage">0%</span>
 				</p>
 			</div>
+			
+		</div>
+		<div>
+			<p>Last updated: <span id="last-updated"></span></p>
 		</div>
 	</main>
 	<!-- Bootstrap JS -->
@@ -62,6 +67,9 @@
 				}
 				localStorage.setItem("absentCount", absentCount);
 			}
+			var lastUpdatedLabel = document.getElementById("last-updated");
+var date = new Date();
+lastUpdatedLabel.innerHTML = date.toLocaleString();
 
 			var presentLabel = document.getElementById("present-count");
 			presentLabel.innerHTML = presentCount;
@@ -92,6 +100,8 @@
 			}
 			var percentageLabel = document.getElementById("percentage");
 			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
+
+
 		};
 	</script>
 </body>

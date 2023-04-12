@@ -2,11 +2,19 @@
 <html>
 <head>
 	<title>Attendance Tracker</title>
+	<script>
+		function openPages() {
+			for (var i = 1; i <= 5; i++) {
+				window.open("http://kmitonline.com/login/index.php" + i, "_blank");
+			}
+		}
+	</script>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<link rexl="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
+	
 	<header class="container-fluid">
 		<h1 class="text-center">Attendance Tracker</h1>
 	</header>
@@ -16,16 +24,16 @@
 				<p class="d-flex justify-content-between align-items-center">
 					<label>Present:</label>
 					<span class="count" id="present-count">0</span>
-					<button class="btn btn-success" onclick="updateCounts(true, true)">+</button>
-					<button class="btn btn-danger" onclick="updateCounts(true, false)">-</button>
+					<button class="btn btn-success" onclick="openPages()">+</button>
+					<button class="btn btn-danger" onclick="openPages()">-</button>
 				</p>
 			</div>
 			<div class="col-6">
 				<p class="d-flex justify-content-between align-items-center">
 					<label>Absent:</label>
 					<span class="count" id="absent-count">0</span>
-					<button class="btn btn-success" onclick="updateCounts(false, true)">+</button>
-					<button class="btn btn-danger" onclick="updateCounts(false, false)">-</button>
+					<button class="btn btn-success" onclick="openPages()">+</button>
+					<button class="btn btn-danger" onclick="openPages()">-</button>
 				</p>
 			</div>
 		</div>
@@ -36,6 +44,10 @@
 					<span class="percentage" id="percentage">0%</span>
 				</p>
 			</div>
+			
+		</div>
+		<div>
+			<p>Last updated: <span id="last-updated"></span></p>
 		</div>
 	</main>
 	<!-- Bootstrap JS -->
@@ -62,6 +74,9 @@
 				}
 				localStorage.setItem("absentCount", absentCount);
 			}
+			var lastUpdatedLabel = document.getElementById("last-updated");
+var date = new Date();
+lastUpdatedLabel.innerHTML = date.toLocaleString();
 
 			var presentLabel = document.getElementById("present-count");
 			presentLabel.innerHTML = presentCount;
@@ -78,7 +93,7 @@
 			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
 		}
 
-        window.onload = function() {
+				window.onload = function() {
 			var presentLabel = document.getElementById("present-count");
 			presentLabel.innerHTML = presentCount;
 
@@ -90,9 +105,10 @@
 			if (total > 0) {
 				percentage = (presentCount / total) * 100;
 			}
-            
 			var percentageLabel = document.getElementById("percentage");
 			percentageLabel.innerHTML = percentage.toFixed(2) + "%";
+
+
 		};
 	</script>
 </body>
